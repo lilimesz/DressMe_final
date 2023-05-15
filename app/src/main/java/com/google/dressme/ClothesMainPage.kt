@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -79,10 +77,8 @@ class ClothesMainPage : Fragment() {
         val addNewBtn = view.findViewById<ImageButton>(R.id.imageButton)
         addNewBtn.setOnClickListener {
             mActivity.replaceFragment(CameraView())
-
-
-
         }
+
 
     }
 

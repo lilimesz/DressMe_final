@@ -70,7 +70,16 @@ class CameraView : Fragment() {
 
     }
 
-    private fun takePhoto() {}
+    private fun takePhoto() {
+        val imageCapture = imageCapture ?: return
+
+
+
+
+
+
+
+    }
 
     private fun startCamera() {
 
