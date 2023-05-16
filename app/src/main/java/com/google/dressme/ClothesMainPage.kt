@@ -3,8 +3,13 @@ package com.google.dressme
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.ImageButton
+import android.widget.LinearLayout
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -75,8 +80,21 @@ class ClothesMainPage : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val addNewBtn = view.findViewById<ImageButton>(R.id.imageButton)
+        val galleryBtn = view.findViewById<Button>(R.id.gallery_button)
+        val cameraBtn = view.findViewById<Button>(R.id.camera_button)
+        val manualBtn = view.findViewById<Button>(R.id.manual_button)
         addNewBtn.setOnClickListener {
-            mActivity.replaceFragment(CameraView())
+            view.findViewById<FrameLayout>(R.id.choose_one).visibility= VISIBLE
+            view.findViewById<LinearLayout>(R.id.choose_one_linear).visibility= VISIBLE
+
+            galleryBtn.setOnClickListener {}
+            cameraBtn.setOnClickListener {mActivity.replaceFragment(CameraView())}
+            manualBtn.setOnClickListener {}
+
+
+
+
+
         }
 
 

@@ -8,7 +8,9 @@
     android:backgroundTint="#4BC5C5C5"
     android:backgroundTintMode="src_over"
     android:orientation="vertical"
-    tools:ignore="UnusedAttribute">
+    tools:ignore="UnusedAttribute"
+    android:alpha="1"
+    android:id="@+id/clothes_main_frameLayout">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv2"
@@ -32,6 +34,50 @@
         android:contentDescription="@string/add_new_item"
         android:src="@drawable/baseline_add_24"
         android:tintMode="src_in" />
+
+    <FrameLayout
+        android:id="@+id/choose_one"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#DCDCDC"
+        android:alpha="0.5"
+        android:visibility="invisible">
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/choose_one_linear"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/lighter"
+        android:elevation="5dp"
+        android:fadingEdge="horizontal"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <Button
+            android:id="@+id/manual_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="Add manually" />
+
+        <Button
+            android:id="@+id/camera_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="Take picture" />
+
+        <Button
+            android:id="@+id/gallery_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="0"
+            android:text="Choose from Gallery" />
+    </LinearLayout>
 
 
 </FrameLayout>

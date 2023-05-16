@@ -7,6 +7,10 @@ android {
     namespace 'com.google.dressme'
     compileSdk 33
 
+    aaptOptions{
+        noCompress "tflite"
+    }
+
     defaultConfig {
         applicationId "com.google.dressme"
         minSdk 21
@@ -54,6 +58,8 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.core:core-ktx:+'
     implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.google.mlkit:image-labeling-custom:17.0.0'
+
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
@@ -67,5 +73,7 @@ dependencies {
 
     implementation "androidx.camera:camera-view:${camerax_version}"
     implementation "androidx.camera:camera-extensions:${camerax_version}"
+
+    implementation("io.coil-kt:coil:1.1.1")
 
 }
