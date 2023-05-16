@@ -9,7 +9,6 @@ import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.LinearLayout
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,8 +18,8 @@ class ClothesMainPage : Fragment() {
 
     private lateinit var newRecyclerView: RecyclerView
     private lateinit var newArrayList: ArrayList<Categories>
-    private lateinit var iconId:Array<Int>
-    private lateinit var descId:Array<String>
+    private lateinit var iconId: Array<Int>
+    private lateinit var descId: Array<String>
     private lateinit var mActivity: MainActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,25 +51,26 @@ class ClothesMainPage : Fragment() {
         )
 
     }
+
     private fun getUserdata() {
 
         for (i in iconId.indices) {
             val category = Categories(iconId[i], descId[i])
             newArrayList.add(category)
         }
-        newRecyclerView.adapter=ClothesMainAdapter(newArrayList)
+        newRecyclerView.adapter = ClothesMainAdapter(newArrayList)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        mActivity= (activity as MainActivity)
+        mActivity = (activity as MainActivity)
         val view = inflater.inflate(R.layout.clothes_main_page, container, false)
         newRecyclerView = view.findViewById<View>(R.id.rcv2) as RecyclerView
         newRecyclerView.setHasFixedSize(true)
-        newRecyclerView.layoutManager= GridLayoutManager(context,3)
-        newArrayList= arrayListOf()
+        newRecyclerView.layoutManager = GridLayoutManager(context, 3)
+        newArrayList = arrayListOf()
         getUserdata()
         return view
 
@@ -84,15 +84,12 @@ class ClothesMainPage : Fragment() {
         val cameraBtn = view.findViewById<Button>(R.id.camera_button)
         val manualBtn = view.findViewById<Button>(R.id.manual_button)
         addNewBtn.setOnClickListener {
-            view.findViewById<FrameLayout>(R.id.choose_one).visibility= VISIBLE
-            view.findViewById<LinearLayout>(R.id.choose_one_linear).visibility= VISIBLE
+            view.findViewById<FrameLayout>(R.id.choose_one).visibility = VISIBLE
+            view.findViewById<LinearLayout>(R.id.choose_one_linear).visibility = VISIBLE
 
             galleryBtn.setOnClickListener {}
-            cameraBtn.setOnClickListener {mActivity.replaceFragment(CameraView())}
+            cameraBtn.setOnClickListener { mActivity.replaceFragment(CameraView()) }
             manualBtn.setOnClickListener {}
-
-
-
 
 
         }

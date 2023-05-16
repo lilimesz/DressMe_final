@@ -10,19 +10,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding=ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         replaceFragment(Home())
 
         binding.bottomNavigationView.setOnItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.home -> replaceFragment(Home())
                 R.id.clothes -> replaceFragment(ClothesMainPage())
                 R.id.profile -> replaceFragment(Profile())
                 R.id.outfits -> replaceFragment(Outfits())
                 R.id.settings -> replaceFragment(Settings())
 
-                else ->{
+                else -> {
                 }
 
             }
@@ -30,15 +30,13 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
-
     }
 
-     fun replaceFragment(fragment: Fragment) {
+    fun replaceFragment(fragment: Fragment) {
 
-        val fragmentManager=supportFragmentManager
+        val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frame_layout,fragment)
+        fragmentTransaction.replace(R.id.frame_layout, fragment)
         fragmentTransaction.commit()
     }
 }
