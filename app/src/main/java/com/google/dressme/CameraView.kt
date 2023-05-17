@@ -10,12 +10,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageProxy
-import androidx.camera.core.Preview
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -33,21 +29,21 @@ class CameraView : Fragment() {
     private var imageCapture: ImageCapture? = null
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var mActivity: MainActivity
+    lateinit var bitmap: Bitmap
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
+
         //BottomNav disable
         val bview = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bview.visibility = View.GONE
 
         viewBinding = FragmentCameraViewBinding.inflate(layoutInflater)
-
         //Permission check & request
         if (allPermissionGranted()) {
-            Toast.makeText(context, "Permissions OK", Toast.LENGTH_SHORT).show()
             startCamera()
         } else {
             Toast.makeText(context, "Permissions needed", Toast.LENGTH_SHORT).show()
@@ -59,6 +55,7 @@ class CameraView : Fragment() {
         }
         viewBinding.imageCaptureButton.setOnClickListener { takePhoto() }
         cameraExecutor = Executors.newSingleThreadExecutor()
+
 
         return viewBinding.root
     }
@@ -102,15 +99,23 @@ class CameraView : Fragment() {
         val imageCapture = imageCapture ?: return
         mActivity = (activity as MainActivity)
 
-        imageCapture.takePicture(cameraExecutor, object : ImageCapture.OnImageCapturedCallback() {
-            @SuppressLint("UnsafeOptInUsageError")
-            override fun onCaptureSuccess(image: ImageProxy) {
-                mActivity.replaceFragment(TakenPic())
-                view?.findViewById<ImageView>(R.id.capturedImage)?.setImageBitmap(image.image?.toBitmap())
-                //mActivity.replaceFragment(imageAnalysis(imageP.toBitmap()))
-                image.close()
-            }
-        })
+        imageCapture.takePicture(
+            ContextCompat.getMainExecutor(requireContext()),
+            object : ImageCapture.OnImageCapturedCallback() {
+
+                @SuppressLint("UnsafeOptInUsageError")
+                override fun onCaptureSuccess(image: ImageProxy) {
+                    bitmap = (image.image?.toBitmapMine())!!
+                    //rotateBitmap(bitmap,180F)
+                    mActivity.replaceFragment(TakenPic(bitmap))
+                    image.close()
+                }
+
+                override fun onError(exception: ImageCaptureException) {
+                    val errorType = exception.imageCaptureError
+                    Log.e("ERROR", errorType.toString())
+                }
+            })
 
     }
 
@@ -120,12 +125,13 @@ class CameraView : Fragment() {
         cameraExecutor.shutdown()
     }
 
-    fun Image.toBitmap(): Bitmap {
+    fun Image.toBitmapMine(): Bitmap {
         val buffer = planes[0].buffer
         buffer.rewind()
         val bytes = ByteArray(buffer.capacity())
         buffer.get(bytes)
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
     }
+
 
 }
