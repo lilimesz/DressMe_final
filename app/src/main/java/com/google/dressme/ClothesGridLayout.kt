@@ -22,20 +22,7 @@ class ClothesGridLayout : Fragment() {
 
 
         imageId = arrayOf(
-            R.drawable.dress1,
-            R.drawable.shoes1,
-            R.drawable.shoes2,
-            R.drawable.shoes3,
-            R.drawable.shoes4,
-            R.drawable.shoes5,
-            R.drawable.shoes6,
-            R.drawable.shoes7,
-            R.drawable.tshirt1,
-            R.drawable.tshirt2,
-            R.drawable.tshirt3,
-            R.drawable.tshirt3,
-            R.drawable.tshirt3,
-            R.drawable.tshirt3,R.drawable.tshirt3,R.drawable.tshirt3,R.drawable.tshirt3
+            R.drawable.dress1
         )
     }
 

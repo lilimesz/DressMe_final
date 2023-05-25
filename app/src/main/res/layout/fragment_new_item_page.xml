@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewItemPage"
+    tools:ignore="SpeakableTextPresentCheck|ContentDescription|HardcodedText">
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="994dp"
+        android:layout_height="1054dp"
+        android:layout_marginStart="-150dp"
+        android:layout_marginBottom="-100dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="ContentDescription,VisualLintBounds" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottomFrameLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="7dp"
+        android:background="#FFF1E6"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline3">
+
+        <TextView
+            android:id="@+id/label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="#FFF7F1"
+            android:elevation="1dp"
+            android:padding="5dp"
+            android:text="T-Shirt"
+            android:textAlignment="center"
+            android:textColor="#391B00"
+            android:textSize="28sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toStartOf="@+id/guideline7"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/colorName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="115dp"
+            android:background="#FFF7F1"
+            android:elevation="1dp"
+            android:padding="5dp"
+            android:text="Blue"
+            android:textAlignment="center"
+            android:textColor="#391B00"
+            android:textSize="28sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toStartOf="@+id/guideline7"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:clickable="true"
+            android:contentDescription="Left Arrow"
+            android:focusable="true"
+            android:src="@drawable/baseline_arrow_forward_ios_24"
+            app:backgroundTint="@color/lighter"
+            app:elevation="2dp"
+            app:layout_constraintBottom_toBottomOf="@+id/label"
+            app:layout_constraintStart_toEndOf="@+id/label"
+            app:layout_constraintTop_toTopOf="@+id/label"
+            tools:ignore="ContentDescription,HardcodedText" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:clickable="true"
+            android:contentDescription="Left Arrow"
+            android:focusable="true"
+            android:src="@drawable/baseline_arrow_forward_ios_24"
+            app:backgroundTint="@color/lighter"
+            app:elevation="2dp"
+            app:layout_constraintBottom_toBottomOf="@+id/colorName"
+            app:layout_constraintStart_toEndOf="@+id/colorName"
+            app:layout_constraintTop_toTopOf="@+id/colorName"
+            tools:ignore="ContentDescription,HardcodedText" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:clickable="true"
+            android:contentDescription="Right Arrow"
+            android:focusable="true"
+            android:src="@drawable/baseline_arrow_back_ios_new_24"
+            app:backgroundTint="@color/lighter"
+            app:elevation="2dp"
+            app:layout_constraintBottom_toBottomOf="@+id/label"
+            app:layout_constraintEnd_toStartOf="@+id/label"
+            app:layout_constraintTop_toTopOf="@+id/label"
+            tools:ignore="HardcodedText" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:clickable="true"
+            android:contentDescription="Right Arrow"
+            android:focusable="true"
+            android:src="@drawable/baseline_arrow_back_ios_new_24"
+            app:backgroundTint="@color/lighter"
+            app:elevation="2dp"
+            app:layout_constraintBottom_toBottomOf="@+id/colorName"
+            app:layout_constraintEnd_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toTopOf="@+id/colorName"
+            tools:ignore="HardcodedText" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.25" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.75" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="460dp" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="70dp"
+        android:background="#E6FFFFFF"
+        android:clipToPadding="true"
+        android:padding="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomFrameLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/dressView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:backgroundTintMode="src_over"
+        android:scaleType="centerInside"
+        android:src="@drawable/sample_tshirt2"
+        app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
+        app:layout_constraintEnd_toEndOf="@+id/frameLayout"
+        app:layout_constraintStart_toStartOf="@+id/frameLayout"
+        app:layout_constraintTop_toTopOf="@+id/frameLayout"
+        tools:ignore="ContentDescription" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
