@@ -1,10 +1,11 @@
-package com.google.dressme
+package com.google.dressme.clothesPage
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
+import com.google.dressme.R
 
 class ClothesAdapter(private val clothesList:ArrayList<Clothes3>) :
     RecyclerView.Adapter<ClothesAdapter.ViewHolder>() {
@@ -14,7 +15,8 @@ class ClothesAdapter(private val clothesList:ArrayList<Clothes3>) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view=LayoutInflater.from(parent.context).inflate(R.layout.grid_item,
+        val view=LayoutInflater.from(parent.context).inflate(
+            R.layout.grid_item,
             parent,false)
         return ViewHolder(view)
     }

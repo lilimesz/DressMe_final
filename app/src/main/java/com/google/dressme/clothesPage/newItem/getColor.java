@@ -1,4 +1,4 @@
-package com.google.dressme;
+package com.google.dressme.clothesPage.newItem;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.google.dressme
+package com.google.dressme.clothesPage
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.dressme.Categories
+import com.google.dressme.R
 
 class ClothesMainAdapter (private val categorySet: ArrayList<Categories>) :
         RecyclerView.Adapter<ClothesMainAdapter.ViewHolder>() {

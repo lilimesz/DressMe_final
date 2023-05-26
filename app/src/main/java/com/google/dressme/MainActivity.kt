@@ -3,6 +3,7 @@ package com.google.dressme
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.google.dressme.clothesPage.ClothesMainPage
 import com.google.dressme.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -18,9 +19,9 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.home -> replaceFragment(Home())
                 R.id.clothes -> replaceFragment(ClothesMainPage())
-                R.id.profile -> replaceFragment(Profile())
+                //R.id.profile -> replaceFragment(Profile())
                 R.id.outfits -> replaceFragment(Outfits())
-                R.id.settings -> replaceFragment(Settings())
+                //R.id.settings -> replaceFragment(Settings())
 
                 else -> {
                 }

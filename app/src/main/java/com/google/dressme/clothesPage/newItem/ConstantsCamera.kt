@@ -1,4 +1,4 @@
-package com.google.dressme
+package com.google.dressme.clothesPage.newItem
 
 import android.Manifest
 import android.os.Build

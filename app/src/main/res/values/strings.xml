@@ -6,4 +6,7 @@
     <string name="take_photo">Take photo</string>
     <string name="take_picture">Take photo</string>
     <string name="take_picture_description">ASD</string>
+    <string name="outfits">Outfits</string>
+    <string name="my_clothes">My clothes</string>
+    <string name="home">Home</string>
 </resources>

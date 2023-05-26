@@ -1,4 +1,4 @@
-package com.google.dressme
+package com.google.dressme.clothesPage.newItem
 
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
@@ -17,6 +17,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.dressme.MainActivity
+import com.google.dressme.R
 import com.google.dressme.databinding.FragmentCameraViewBinding
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors

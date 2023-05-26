@@ -1,4 +1,4 @@
-package com.google.dressme
+package com.google.dressme.clothesPage.newItem
 
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -12,6 +12,8 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import com.google.dressme.MainActivity
+import com.google.dressme.R
 import com.google.mlkit.common.model.LocalModel
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.label.ImageLabeling
@@ -54,7 +56,7 @@ class TakenPic(private var bitmap: Bitmap) : Fragment() {
         return view
     }
 
-    private  fun imageAnalyser() {
+    fun imageAnalyser() {
         var labelString = ""
         val localModel = LocalModel.Builder().setAssetFilePath("model.tflite").build()
         val options = CustomImageLabelerOptions.Builder(localModel).setConfidenceThreshold(0.3f)

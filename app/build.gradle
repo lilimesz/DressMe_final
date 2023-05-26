@@ -7,7 +7,7 @@ android {
     namespace 'com.google.dressme'
     compileSdk 33
 
-    aaptOptions{
+    aaptOptions {
         noCompress "tflite"
     }
 
@@ -29,7 +29,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding true
         dataBinding true
 
@@ -41,6 +41,13 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    sourceSets {
+        main {
+            res {
+                srcDirs 'src\\main\\res'
+            }
+        }
     }
 }
 

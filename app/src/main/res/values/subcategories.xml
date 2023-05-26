@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <array name="Top" id="@+id/Top">
+        <item>T-Shirt</item>
+        <item>Top</item>
+        <item>Polo shirt</item>
+        <item>Body</item>
+        <item>Undershirt</item>
+    </array>
+    <array name="Jacket" id="@+id/Jacket">
+        <item>Jacket</item>
+        <item>Blazer</item>
+        <item>Zip-up</item>
+    </array>
+    <array name="Hoodie" id="@+id/Hoodie">
+        <item>-</item>
+    </array>
+    <array name="Longsleeve">
+        <item>Shirt</item>
+        <item>Blouse</item>
+    </array>
+    <array name="Pants">
+        <item>Jeans</item>
+        <item>Shorts</item>
+        <item>Trousers</item>
+    </array>
+    <array name="Skirt">
+        <item>-</item>
+    </array>
+    <array name="Dress">
+        <item>-</item>
+    </array>
+    <array name="Shoes">
+        <item>-</item>
+    </array>
+    <array name="Hat">
+        <item>-</item>
+    </array>
+    <array name="Outwear">
+        <item>-</item>
+    </array>
+    <array name="Other">
+        <item>-</item>
+    </array>
+
+</resources>

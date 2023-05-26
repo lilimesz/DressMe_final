@@ -1,4 +1,4 @@
-package com.google.dressme
+package com.google.dressme.clothesPage
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.dressme.R
 
 
 class ClothesGridLayout : Fragment() {
@@ -33,7 +34,7 @@ class ClothesGridLayout : Fragment() {
             newArrayList.add(clothes)
             //newArrayList.add(Clothes3(drawable))
         }
-        newRecyclerView.adapter=ClothesAdapter(newArrayList)
+        newRecyclerView.adapter= ClothesAdapter(newArrayList)
     }
 
     override fun onCreateView(
