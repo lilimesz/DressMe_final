@@ -1,6 +1,5 @@
 package com.google.dressme.clothesPage
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.LinearLayout
-import androidx.core.graphics.toColor
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +16,6 @@ import com.google.dressme.Categories
 import com.google.dressme.MainActivity
 import com.google.dressme.R
 import com.google.dressme.clothesPage.newItem.CameraView
-import com.google.dressme.clothesPage.newItem.NewItemPage
 
 
 class ClothesMainPage : Fragment() {
@@ -95,12 +92,13 @@ class ClothesMainPage : Fragment() {
 
             galleryBtn.setOnClickListener {}
             cameraBtn.setOnClickListener { mActivity.replaceFragment(CameraView()) }
-            manualBtn.setOnClickListener {
+            manualBtn.setOnClickListener {/*
                 mActivity.replaceFragment(
                     NewItemPage(
-                        "T-Shirt", Color.WHITE.toColor()
-                    )
-                )
+                        "T-Shirt",
+                        Color.WHITE.toColor(),
+                        TakenPic(Bitmap.createBitmap(R.drawable.tshirt_template)).labelList
+                    )*/
             }
 
 

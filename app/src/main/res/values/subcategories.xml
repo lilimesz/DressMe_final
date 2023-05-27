@@ -2,46 +2,59 @@
 
 <resources>
 
-    <array name="Top" id="@+id/Top">
-        <item>T-Shirt</item>
+    <array name="Top">
         <item>Top</item>
-        <item>Polo shirt</item>
+        <item>Top</item>
+        <item>T-Shirt</item>
+        <item>Polo</item>
         <item>Body</item>
         <item>Undershirt</item>
     </array>
-    <array name="Jacket" id="@+id/Jacket">
+    <array name="Blazer_Jacket">
+        <item>Jacket</item>
         <item>Jacket</item>
         <item>Blazer</item>
-        <item>Zip-up</item>
     </array>
-    <array name="Hoodie" id="@+id/Hoodie">
+    <array name="Hoodie">
+        <item>Hoodie</item>
         <item>-</item>
     </array>
     <array name="Longsleeve">
+        <item>Longsleeve</item>
+        <item>Longsleeve</item>
         <item>Shirt</item>
         <item>Blouse</item>
     </array>
     <array name="Pants">
+        <item>Pants</item>
+        <item>Pants</item>
         <item>Jeans</item>
         <item>Shorts</item>
-        <item>Trousers</item>
     </array>
     <array name="Skirt">
+        <item>Skirt</item>
         <item>-</item>
     </array>
     <array name="Dress">
+        <item>Dress</item>
         <item>-</item>
     </array>
     <array name="Shoes">
-        <item>-</item>
+        <item>Shoes</item>
+        <item>Shoes</item>
+        <item>Heels</item>
+        <item>Boots</item>
     </array>
     <array name="Hat">
+        <item>Hat</item>
         <item>-</item>
     </array>
     <array name="Outwear">
+        <item>Outwear</item>
         <item>-</item>
     </array>
     <array name="Other">
+        <item>Other</item>
         <item>-</item>
     </array>
 

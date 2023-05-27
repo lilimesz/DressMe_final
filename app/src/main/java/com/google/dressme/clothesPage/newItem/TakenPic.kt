@@ -36,14 +36,13 @@ class TakenPic(private var bitmap: Bitmap) : Fragment() {
         val retakeBtn = view.findViewById<Button>(R.id.retake_button)
         val continueBtn = view.findViewById<Button>(R.id.continue_button)
 
+
         bitmap.apply {
             img.setImageBitmap(this)
         }
 
         //dressColor=bitmap.getColor(bitmap.width/2,bitmap.height/2)
         dressColor=getDominantColor(bitmap)
-
-
 
         image = InputImage.fromBitmap(bitmap, 90)
         img.rotation = 90F
@@ -56,7 +55,7 @@ class TakenPic(private var bitmap: Bitmap) : Fragment() {
         return view
     }
 
-    fun imageAnalyser() {
+    private fun imageAnalyser() {
         var labelString = ""
         val localModel = LocalModel.Builder().setAssetFilePath("model.tflite").build()
         val options = CustomImageLabelerOptions.Builder(localModel).setConfidenceThreshold(0.3f)
@@ -71,11 +70,11 @@ class TakenPic(private var bitmap: Bitmap) : Fragment() {
                     labelString = label.text
                     mActivity.replaceFragment(NewItemPage(labelString,dressColor))
                 }
-                i++
                 val text = label.text
                 val confidence = label.confidence * 100
                 Log.d("Image Classif. results", "$text : $confidence %\n")
                 Log.d("LABEL", labelString)
+                i++
             }
         }.addOnFailureListener {
             // Task failed with an exception
