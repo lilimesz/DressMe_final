@@ -2,7 +2,6 @@ package com.google.dressme.clothesPage.newItem
 
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -24,7 +23,6 @@ import androidx.fragment.app.Fragment
 import com.google.dressme.MainActivity
 import com.google.dressme.R
 import java.util.*
-import java.util.Arrays.copyOfRange
 
 
 class NewItemPage(
@@ -81,7 +79,7 @@ class NewItemPage(
             "Outwear",
             "Other"
         )
-        subcategories = arrayOf(
+        subcategories    = arrayOf(
             Top, Jacket, Hoodie, Longsleeve, Pants, Skirt, Dress, Shoes, Hat, Outwear, Other
         )
 
@@ -115,20 +113,20 @@ class NewItemPage(
 
 
         //OnClickListener a label TextView-ra manuális felülíráshoz
+        Log.e("1","check") //First N
         selectItem(labelTVArray, labelTV, categories, false)
 
         //Type
         //Ha még nincs felülírt típus, akkor...
         if (selectedType == null) {
-            defaultPicSelect(getLabelID(label),getTypeID(label))
+            defaultPicSelect(getLabelID(label), getTypeID(label)) //Innen kapja a 4th N
             typeTVArray.ensureCapacity(typeArray.size)
-            prepareLinearLO(typeTVArray, typeTV, typeArray, false)
+            prepareLinearLO(typeTVArray, typeTV, typeArray, false) //Innen meg a 14th
 
         }
 
-        if (typeTV.text != "-") {
-            selectItem(typeTVArray, typeTV, typeArray, true) //OnClickListener
-        }
+        selectItem(typeTVArray, typeTV, typeArray, true) //OnClickListener
+
 
         //Color
         val colorText = view.findViewById<TextView>(R.id.colorName)
@@ -151,6 +149,8 @@ class NewItemPage(
         textArray: Array<String>,
         isSubcategory: Boolean
     ) {
+        if (myLabel.text != "-"){
+        Log.e("4","check") //14        (//change 1?)    //TypeChange1
         var labelID = getLabelID(myLabel.text.toString())
         myLayout.removeAllViews()
         for (l in textArray.indices) {
@@ -168,18 +168,23 @@ class NewItemPage(
 
 
                 setOnClickListener {
-                    selectedType = id+1
+                    Log.e("5","check")   //change2  //Typechange2
+                    selectedType = id + 1
                     myLayout.visibility = INVISIBLE
                     bgBLur.visibility = INVISIBLE
                     myLabel.text = this.text
                     if (!isSubcategory) {
+                        Log.e("6A","check") //change3
                         labelID = id
                         pairs.clear()
-                        defaultPicSelect(labelID,0)
+                        defaultPicSelect(labelID, 0)
                         typeTV.text = typeArray[0]
-                        if (typeArray[0] != "-"){
-                        selectItem(typeTVArray, typeTV, typeArray, true)}
+                        if (typeArray.size !=1) {
+                            Log.e("6A1","check") //change16
+                            selectItem(typeTVArray, typeTV, typeArray, true)
+                        }
                     } else {
+                        Log.e("6B","check")  //Typechange3
                         defaultPicSelect(labelID, selectedType!!)
                     }
                 }
@@ -189,7 +194,7 @@ class NewItemPage(
         }
 
 
-    }
+    }}
 
     private fun templateArray() {
         sampleId = arrayOf(
@@ -217,113 +222,111 @@ class NewItemPage(
         )
     }
 
-    private fun defaultPicSelect(labelID: Int,typeID:Int) {
-        Log.e("LABELID",labelID.toString())
-        Log.e("TYPEID",typeID.toString())
+    private fun defaultPicSelect(labelID: Int, typeID: Int) : Boolean {
+        //if (selectedType != null) {
+        Log.e("7","check") //4th     //change4    //Typechange4
+            label = subcategories[labelID][typeID]
+        //}
 
-        if (selectedType!=null){
-            label=subcategories[labelID][typeID]
-        }
-
-        var found = false
-        if (label == "Blazer_Jacket") {
+        /*if (label == "Blazer" || label == "Jacket") {
             labelTV.text = "Jacket"
             typeArray = subcategories[1]
             typeTV.text = "choose one"
             typeTV.setTypeface(typeTV.typeface, Typeface.ITALIC)
             newPiece.setImageResource(R.drawable.jacket_template)
-        } else {
-            do {
+        } else {*/
                 for (i in subcategories.indices) {
                     if (subcategories[i].size == 2) {
+                        Log.e("8","check") //7th, 10,11,13  //change8,11,12,14,15,16
                         if (subcategories[i][0] == label) {
+                            Log.e("9","check") //14
                             typeArray = subcategories[i].copyOfRange(1, (subcategories[i].size))
-                            newPiece.setImageResource(sampleId[getIdForPic(labelID,0)])
+                            newPiece.setImageResource(sampleId[getIdForPic(labelID, 0)])
                             labelTV.text = subcategories[i][0]
                             typeTV.text = typeArray[0]
-                            found = true
-                            break
+                            return true
                         }
                     } else {
+                        Log.e("10","check") //5&6th // 8,9,12 /////change5,6,9,10,13 //Typechange5,6
                         for (j in 1 until subcategories[i].size) {
                             if (subcategories[i][j] == label) {
+                                Log.e("11","check") //change7 //Typechange7
                                 typeArray = subcategories[i].copyOfRange(1, (subcategories[i].size))
-                                newPiece.setImageResource(sampleId[getIdForPic(i,j)])
+                                newPiece.setImageResource(sampleId[getIdForPic(i, j)])
                                 labelTV.text = subcategories[i][0]
                                 typeTV.text = subcategories[i][j]
-                                found = true
+                                return true
                             }
                         }
                     }
 
                 }
-            } while (!found)
+            return false
         }
-    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun selectItem(
         TVArray: ArrayList<TextView?>, TV: TextView, SArray: Array<String>, isSubcategory: Boolean
     ) {
-        if (TV.text != "-") {
+        Log.e("2","check") //Second N, Last N    //change17
+        if(TV.text.toString() != "-") {
+            Log.e("3","check") //Third N         //change18 Last
             TV.setOnClickListener {
                 prepareLinearLO(TVArray, TV, SArray, isSubcategory)
                 mainscreen = false
                 myLayout.visibility = VISIBLE
                 bgBLur.visibility = VISIBLE
-            }
+            }}
         }
 
-    }
+
 
     private fun getLabelID(label: String): Int {
-        var labelID = 0
-        var found = false
-        do {
             for (i in subcategories.indices) {
                 for (j in subcategories[i].indices) {
                     if (subcategories[i][j] == label) {
-                        labelID = i
-                        found = true
+                        return i
                     }
                 }
             }
-        } while (!found)
-        return labelID
+        return -1
     }
 
     private fun getTypeID(label: String): Int {
-        var typeID = 0
-        var found = false
-        if (label == "-"){
+        
+        if (label == "-") {
             return 0
         }
-        do {
             for (i in subcategories.indices) {
-                for (j in 1 until subcategories[i].size) {
-                    if (subcategories[i][j] == label) {
-                        if (subcategories[i].size==2)
-                        {return 0}
-                        else{
-                        typeID = j}
-                        found = true
+                if (subcategories[i].size == 2) {
+                    if (subcategories[i][0] == label) {
+                        return 0
                     }
                 }
-            }
-        } while (!found)
-        return typeID
+                else {
+                    for (j in 1 until subcategories[i].size) {
+                        if (subcategories[i][j] == label) {
+                                return j
+                            }
+                        }
+                    }
+                }
+        return -1
     }
-    
-    private fun getIdForPic(labelID : Int,typeID:Int): Int {
-        var picID=0
-        if (labelID != 0){
-        for (i in 0 until  labelID) {
-        picID += (subcategories[i].size-1)
-        }}
-        if (typeID == 0) {return picID}
-        else{
-        picID+=typeID-1}
-        Log.e("PICID",picID.toString())
+
+    private fun getIdForPic(labelID: Int, typeID: Int): Int {
+        var picID = 0
+        if (labelID != 0) { //tehát az adott darab nem az első kategóriában van
+            for (i in 0 until labelID) {
+                picID += (subcategories[i].size - 1)
+            }
+            if (typeID == 0) {
+                return picID
+            }
+        }
+        if (typeID != 0) {
+            picID += typeID-1
+        }
         return picID
     }
 
