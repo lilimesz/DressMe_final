@@ -20,6 +20,8 @@ import androidx.core.graphics.blue
 import androidx.core.graphics.green
 import androidx.core.graphics.red
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.dressme.MainActivity
 import com.google.dressme.R
 import java.util.*
@@ -37,6 +39,8 @@ class NewItemPage(
     private lateinit var newPiece: ImageView
     private val labelTVArray = kotlin.collections.ArrayList<TextView?>(11)
     private var typeTVArray = ArrayList<TextView?>(emptyList())
+    private lateinit var colorArrayList: ArrayList<Colors>
+    private lateinit var colorRecyclerView: RecyclerView
 
     private lateinit var typeArray: Array<String>
     private lateinit var myLayout: LinearLayout
@@ -83,6 +87,9 @@ class NewItemPage(
             Top, Jacket, Hoodie, Longsleeve, Pants, Skirt, Dress, Shoes, Hat, Outwear, Other
         )
 
+
+
+
         templateArray()
 
 
@@ -92,6 +99,16 @@ class NewItemPage(
                 mActivity.replaceFragment(CameraView())
             }
         }
+    }
+
+    private fun getUserdata() {
+
+        val colorlist = ColorUtils().initColorList()
+        for (i in colorlist.indices) {
+            val color = Colors(Color.parseColor("#${Integer.toHexString(Color.rgb(colorlist[i].r,colorlist[i].g,colorlist[i].b))}"))
+            colorArrayList.add(color)
+        }
+        colorRecyclerView.adapter = ColorsAdapter(colorArrayList)
     }
 
 
@@ -125,16 +142,30 @@ class NewItemPage(
 
         }
 
+
         selectItem(typeTVArray, typeTV, typeArray, true) //OnClickListener
 
 
         //Color
         val colorText = view.findViewById<TextView>(R.id.colorName)
+        val colorLayout = view.findViewById<LinearLayout>(R.id.chooseColor)
         val dressColor = color.toArgb()
         val colorName =
             ColorUtils().getColorNameFromRgb(dressColor.red, dressColor.green, dressColor.blue)
         newPiece.setColorFilter(dressColor, PorterDuff.Mode.MULTIPLY)
         colorText.text = colorName
+
+        colorRecyclerView = view.findViewById<View>(R.id.chooseColorRCV) as RecyclerView
+        colorRecyclerView.setHasFixedSize(true)
+        colorRecyclerView.layoutManager = GridLayoutManager(context, 6)
+        colorArrayList = arrayListOf()
+        getUserdata()
+
+        colorText.setOnClickListener {
+            colorLayout.visibility= VISIBLE
+            bgBLur.visibility=VISIBLE
+        }
+
 
 
 
@@ -149,7 +180,7 @@ class NewItemPage(
         textArray: Array<String>,
         isSubcategory: Boolean
     ) {
-        if (myLabel.text != "-"){
+        if (typeArray.size != 1) {
         Log.e("4","check") //14        (//change 1?)    //TypeChange1
         var labelID = getLabelID(myLabel.text.toString())
         myLayout.removeAllViews()
@@ -165,6 +196,7 @@ class NewItemPage(
                 setTextColor(Color.BLACK)
                 setPadding(2, 2, 2, 20)
                 setBackgroundColor(Color.WHITE)
+
 
 
                 setOnClickListener {
@@ -191,10 +223,10 @@ class NewItemPage(
             }
             myLayout.addView(pairs[l])
 
-        }
 
 
-    }}
+
+    }}}
 
     private fun templateArray() {
         sampleId = arrayOf(
@@ -223,10 +255,11 @@ class NewItemPage(
     }
 
     private fun defaultPicSelect(labelID: Int, typeID: Int) : Boolean {
-        //if (selectedType != null) {
-        Log.e("7","check") //4th     //change4    //Typechange4
+        Log.e("7B","check") //4th     //change4    //Typechange4
+        if (selectedType != null) {
+
             label = subcategories[labelID][typeID]
-        //}
+        }
 
         /*if (label == "Blazer" || label == "Jacket") {
             labelTV.text = "Jacket"
@@ -269,14 +302,14 @@ class NewItemPage(
         TVArray: ArrayList<TextView?>, TV: TextView, SArray: Array<String>, isSubcategory: Boolean
     ) {
         Log.e("2","check") //Second N, Last N    //change17
-        if(TV.text.toString() != "-") {
-            Log.e("3","check") //Third N         //change18 Last
             TV.setOnClickListener {
+                Log.e("3","check")
+                if(TV.text.length > 2){
                 prepareLinearLO(TVArray, TV, SArray, isSubcategory)
                 mainscreen = false
                 myLayout.visibility = VISIBLE
-                bgBLur.visibility = VISIBLE
-            }}
+                bgBLur.visibility = VISIBLE}
+            }
         }
 
 
@@ -293,7 +326,7 @@ class NewItemPage(
     }
 
     private fun getTypeID(label: String): Int {
-        
+
         if (label == "-") {
             return 0
         }

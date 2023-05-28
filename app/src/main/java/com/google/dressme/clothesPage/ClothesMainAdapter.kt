@@ -13,7 +13,7 @@ class ClothesMainAdapter (private val categorySet: ArrayList<Categories>) :
         RecyclerView.Adapter<ClothesMainAdapter.ViewHolder>() {
 
 
-            var onItemClick: ((Categories) -> Unit)? = null
+            //var onItemClick: ((Categories) -> Unit)? = null
 
             class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 

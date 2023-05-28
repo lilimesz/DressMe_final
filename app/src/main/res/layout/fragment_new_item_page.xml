@@ -253,9 +253,10 @@
     <LinearLayout
         android:id="@+id/chooseLabel"
         android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:animationCache="true"
+        android:background="#FFFAFA"
         android:dividerPadding="2dp"
         android:elevation="2dp"
         android:isScrollContainer="true"
@@ -265,6 +266,32 @@
         app:layout_constraintBottom_toBottomOf="@+id/backgroundBlur"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/chooseColor"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="#FFFAFA"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/backgroundBlur"
+        app:layout_constraintStart_toStartOf="@+id/backgroundBlur"
+        app:layout_constraintTop_toTopOf="@+id/backgroundBlur">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chooseColorRCV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="6"
+            tools:ignore="SpeakableTextPresentCheck"
+            tools:itemCount="42"
+            tools:listitem="@layout/color_grid_item" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

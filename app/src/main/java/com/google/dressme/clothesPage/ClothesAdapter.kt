@@ -14,6 +14,7 @@ class ClothesAdapter(private val clothesList:ArrayList<Clothes3>) :
         val imageView : ShapeableImageView = itemView.findViewById(R.id.item_image)
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view=LayoutInflater.from(parent.context).inflate(
             R.layout.grid_item,
@@ -26,15 +27,12 @@ class ClothesAdapter(private val clothesList:ArrayList<Clothes3>) :
         if (position < clothesList.size) {
         val currentItem = clothesList[position]
         holder.imageView.setImageResource(currentItem.image)}
-        else {
-            holder.imageView.setImageResource(R.drawable.baseline_add_24)
-        }
         }
 
 
 
    override fun getItemCount(): Int {
-        return clothesList.size+1
+        return clothesList.size
     }
 
 

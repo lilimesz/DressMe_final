@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="2dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/item_pic_prev2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        android:src="@drawable/baseline_circle_24"
+        app:contentPaddingBottom="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#707070"
+        app:tintMode="multiply"
+        tools:ignore="ImageContrastCheck" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/color_pic_prev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
+        android:src="@drawable/baseline_circle_24"
+        app:contentPaddingBottom="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#FFFFFF"
+        app:tintMode="multiply"
+        tools:ignore="ImageContrastCheck" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
