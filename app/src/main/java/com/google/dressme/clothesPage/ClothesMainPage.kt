@@ -14,7 +14,6 @@ import androidx.core.graphics.toColor
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.dressme.Categories
 import com.google.dressme.MainActivity
 import com.google.dressme.R
 import com.google.dressme.clothesPage.newItem.CameraView
@@ -28,6 +27,7 @@ class ClothesMainPage : Fragment() {
     private lateinit var iconId: Array<Int>
     private lateinit var descId: Array<String>
     private lateinit var mActivity: MainActivity
+    private lateinit var clothesAdapter:ClothesMainAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,26 +35,31 @@ class ClothesMainPage : Fragment() {
 
         iconId = arrayOf(
             R.drawable.tshirt,
+            R.drawable.long_sleeve,
             R.drawable.hood,
-            R.drawable.overcoat,
+            R.drawable.long_sleeve,
             R.drawable.jeans,
+            R.drawable.skirt,
             R.drawable.dress,
             R.drawable.sport_shoe,
-            R.drawable.long_sleeve,
-            R.drawable.boot,
-            R.drawable.cap
+            R.drawable.cap,
+            R.drawable.overcoat,
+            R.drawable.singlet
+
         )
 
         descId = arrayOf(
-            "T-Shirts",
+            "Tops",
+            "Jackets & Blazers",
             "Hoodies",
-            "Overcoats",
-            "Jeans",
+            "Long-sleeves",
+            "Pants",
+            "Skirts",
             "Dresses",
             "Shoes",
-            "Long sleeves",
-            "Boots",
-            "Hats"
+            "Hats",
+            "Outwears",
+            "Other"
         )
 
     }
@@ -65,7 +70,9 @@ class ClothesMainPage : Fragment() {
             val category = Categories(iconId[i], descId[i])
             newArrayList.add(category)
         }
-        newRecyclerView.adapter = ClothesMainAdapter(newArrayList)
+
+        clothesAdapter= ClothesMainAdapter(newArrayList)
+        newRecyclerView.adapter = clothesAdapter
     }
 
     override fun onCreateView(
@@ -78,6 +85,11 @@ class ClothesMainPage : Fragment() {
         newRecyclerView.layoutManager = GridLayoutManager(context, 3)
         newArrayList = arrayListOf()
         getUserdata()
+
+       clothesAdapter.onItemClick = {
+            mActivity.replaceFragment(ClothesGridLayout())
+        }
+
         return view
 
     }

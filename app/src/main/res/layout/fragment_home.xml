@@ -21,6 +21,22 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription,ImageContrastCheck" />
 
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="55dp"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="90dp"
+        android:backgroundTint="#656565"
+        android:contentDescription="@string/add_new_item"
+        android:src="@drawable/baseline_add_24"
+        android:tintMode="src_in"
+        app:layout_constraintEnd_toEndOf="@+id/mannequin2"
+        app:layout_constraintStart_toStartOf="@+id/mannequin2"
+        app:layout_constraintTop_toTopOf="@+id/mannequin2" />
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/weather"
         android:layout_width="300dp"
@@ -32,20 +48,20 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-        <GridLayout
+        <androidx.gridlayout.widget.GridLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/gradient_bg"
-            android:columnCount="3"
-            android:rowCount="1">
+            app:columnCount="3"
+            app:rowCount="1">
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_columnWeight="2"
                 android:layout_margin="3dp"
                 android:layout_marginRight="0dp"
-                android:textAlignment="center">
+                android:textAlignment="center"
+                app:layout_columnWeight="2">
 
                 <ImageView
                     android:id="@+id/weatherIcon"
@@ -54,7 +70,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
                     android:src="@drawable/baseline_wb_sunny_24"
-                    android:tint="#512500" />
+                    app:tint="#512500" />
 
                 <TextView
                     android:id="@+id/weatherDesc"
@@ -75,10 +91,9 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_columnWeight="3"
-                android:layout_rowWeight="1"
                 android:layout_marginLeft="0dp"
-                >
+                app:layout_columnWeight="3"
+                app:layout_rowWeight="1">
 
                 <TextView
                     android:id="@+id/temp"
@@ -114,17 +129,17 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignBottom="@id/location"
                     android:layout_marginBottom="1dp"
-                    android:tint="#512500"
-                    android:src="@drawable/baseline_location_on_24" />
+                    android:src="@drawable/baseline_location_on_24"
+                    app:tint="#512500" />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                app:layout_rowWeight="1"
+                app:layout_columnWeight="1">
 
                 <ImageButton
                     android:id="@+id/calendarButton"
@@ -140,13 +155,13 @@
                     android:minWidth="48dp"
                     android:minHeight="48dp"
                     android:src="@drawable/baseline_calendar_month_24"
-                    android:tint="#512500"
-                    tools:ignore="ImageContrastCheck"/>
+                    tools:ignore="ImageContrastCheck"
+                    app:tint="#512500" />
                 <!--                    android:onClick="Calendar()"-->
 
             </RelativeLayout>
 
-        </GridLayout>
+        </androidx.gridlayout.widget.GridLayout>
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

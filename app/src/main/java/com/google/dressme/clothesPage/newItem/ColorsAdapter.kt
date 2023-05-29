@@ -1,6 +1,7 @@
 package com.google.dressme.clothesPage.newItem
 
 import android.graphics.PorterDuff
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +12,15 @@ import com.google.dressme.R
 class ColorsAdapter(private val colorsList:ArrayList<Colors>) :
 RecyclerView.Adapter<ColorsAdapter.ViewHolder>() {
 
+    var onItemClick: ((Colors) -> Unit)? = null
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ShapeableImageView
 
         init {
             imageView = itemView.findViewById(R.id.color_pic_prev)
+            itemView.setOnClickListener { onItemClick?.invoke(colorsList[adapterPosition])
+            }
         }
 
     }

@@ -11,7 +11,7 @@
         android:layout_height="130dp"
         app:cardCornerRadius="7dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -36,6 +36,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="75dp"
             android:textSize="11sp"
+            android:textAlignment="center"
             android:text="T-Shirts"
             android:textColor="@color/black" />
 

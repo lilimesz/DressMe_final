@@ -15,12 +15,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv2"
         android:layout_width="match_parent"
-        android:layout_height="470dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
-        android:layout_marginVertical="100sp"
-        android:layout_marginTop="100dp"
+        android:layout_marginVertical="50sp"
+        android:layout_marginTop="50dp"
+        android:textAlignment="center"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="3"
+        tools:itemCount="11"
         tools:listitem="@layout/clothes_main_grid_item" />
 
     <ImageButton
