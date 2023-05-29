@@ -1,15 +1,5 @@
 package com.google.dressme.clothesPage;
 
-import android.graphics.Color;
-import android.util.Log;
-
-import androidx.camera.core.processing.SurfaceProcessorNode;
-
-import com.google.dressme.R;
-
-import java.util.ArrayList;
-
-
 public class Clothing {
     public String label, type;
     public Integer image, color;

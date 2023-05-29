@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.dressme.R
 
-class ClothesAdapter(private val clothesList: ArrayList<Clothes3>) :
+class ClothesAdapter(private val clothesList: ArrayList<Clothes>) :
     RecyclerView.Adapter<ClothesAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

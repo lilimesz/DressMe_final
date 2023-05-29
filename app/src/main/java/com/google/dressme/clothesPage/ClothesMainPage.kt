@@ -94,6 +94,8 @@ class ClothesMainPage : Fragment() {
         val galleryBtn = view.findViewById<Button>(R.id.gallery_button)
         val cameraBtn = view.findViewById<Button>(R.id.camera_button)
         val manualBtn = view.findViewById<Button>(R.id.manual_button)
+
+
         addNewBtn.setOnClickListener {
             view.findViewById<FrameLayout>(R.id.choose_one).visibility = VISIBLE
             view.findViewById<LinearLayout>(R.id.choose_one_linear).visibility = VISIBLE

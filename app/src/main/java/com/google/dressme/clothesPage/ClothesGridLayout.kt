@@ -18,35 +18,8 @@ class ClothesGridLayout(
 
     private lateinit var newRecyclerView: RecyclerView
     private lateinit var clothesAdapter: ClothesAdapter
-    private lateinit var newArrayList: ArrayList<Clothes3>
+    private lateinit var newArrayList: ArrayList<Clothes>
     private var clothesList: MutableList<Clothing> = ArrayList()
-
-
-    private fun getUserdata() {
-
-        if (clothesList.isNotEmpty()) {
-
-            for (i in clothesList.indices) {
-                if ("${clothesList[i].label[0]}${clothesList[i].label[1]}"==helper){
-                newArrayList.add(
-                    Clothes3(
-                        clothesList[i].getLabel(),
-                        clothesList[i].getType(),
-                        clothesList[i].getColor(),
-                        clothesList[i].getImage()
-                    )
-                )
-            }}
-
-            clothesAdapter = ClothesAdapter(newArrayList)
-            newRecyclerView.adapter = clothesAdapter
-
-        } else {
-            Toast.makeText(context, "No items here!", Toast.LENGTH_LONG).show()
-            clothesAdapter = ClothesAdapter(newArrayList)
-            newRecyclerView.adapter = clothesAdapter
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -62,6 +35,32 @@ class ClothesGridLayout(
         getUserdata()
 
         return view
+    }
+
+    private fun getUserdata() {
+
+        if (clothesList.isNotEmpty()) {
+
+            for (i in clothesList.indices) {
+                if ("${clothesList[i].label[0]}${clothesList[i].label[1]}"==helper){
+                    newArrayList.add(
+                        Clothes(
+                            clothesList[i].getLabel(),
+                            clothesList[i].getType(),
+                            clothesList[i].getColor(),
+                            clothesList[i].getImage()
+                        )
+                    )
+                }}
+
+            clothesAdapter = ClothesAdapter(newArrayList)
+            newRecyclerView.adapter = clothesAdapter
+
+        } else {
+            Toast.makeText(context, "No items here!", Toast.LENGTH_LONG).show()
+            clothesAdapter = ClothesAdapter(newArrayList)
+            newRecyclerView.adapter = clothesAdapter
+        }
     }
 
 }

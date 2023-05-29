@@ -165,7 +165,6 @@ class NewItemPage(
         isSubcategory: Boolean
     ) {
         if (typeArray.size != 1) {
-            Log.e("4", "check") //14        (//change 1?)    //TypeChange1
             var labelID = getLabelID(myLabel.text.toString())
             myLayout.removeAllViews()
             for (l in textArray.indices) {
@@ -184,23 +183,19 @@ class NewItemPage(
 
 
                     setOnClickListener {
-                        Log.e("5", "check")   //change2  //Typechange2
                         selectedType = id + 1
                         myLayout.visibility = INVISIBLE
                         bgBLur.visibility = INVISIBLE
                         myLabel.text = this.text
                         if (!isSubcategory) {
-                            Log.e("6A", "check") //change3
                             labelID = id
                             pairs.clear()
                             defaultPicSelect(labelID, 0)
                             typeTV.text = typeArray[0]
                             if (typeArray.size != 1) {
-                                Log.e("6A1", "check") //change16
                                 selectItem(typeTVArray, typeTV, typeArray, true)
                             }
                         } else {
-                            Log.e("6B", "check")  //Typechange3
                             defaultPicSelect(labelID, selectedType!!)
                         }
                     }
@@ -213,24 +208,13 @@ class NewItemPage(
     }
 
     private fun defaultPicSelect(labelID: Int, typeID: Int): Boolean {
-        Log.e("7B", "check") //4th     //change4    //Typechange4
         if (selectedType != null) {
 
             label = subcategories[labelID][typeID]
         }
-
-        /*if (label == "Blazer" || label == "Jacket") {
-            labelTV.text = "Jacket"
-            typeArray = subcategories[1]
-            typeTV.text = "choose one"
-            typeTV.setTypeface(typeTV.typeface, Typeface.ITALIC)
-            newPiece.setImageResource(R.drawable.jacket_template)
-        } else {*/
         for (i in subcategories.indices) {
             if (subcategories[i].size == 2) {
-                Log.e("8", "check") //7th, 10,11,13  //change8,11,12,14,15,16
                 if (subcategories[i][0] == label) {
-                    Log.e("9", "check") //14
                     typeArray = subcategories[i].copyOfRange(1, (subcategories[i].size))
                     newPiece.setImageResource(sampleId[getIdForPic(labelID, 0)])
                     labelTV.text = subcategories[i][0]
@@ -238,10 +222,8 @@ class NewItemPage(
                     return true
                 }
             } else {
-                Log.e("10", "check") //5&6th // 8,9,12 /////change5,6,9,10,13 //Typechange5,6
                 for (j in 1 until subcategories[i].size) {
                     if (subcategories[i][j] == label) {
-                        Log.e("11", "check") //change7 //Typechange7
                         typeArray = subcategories[i].copyOfRange(1, (subcategories[i].size))
                         newPiece.setImageResource(sampleId[getIdForPic(i, j)])
                         labelTV.text = subcategories[i][0]
@@ -250,7 +232,6 @@ class NewItemPage(
                     }
                 }
             }
-
         }
         return false
     }

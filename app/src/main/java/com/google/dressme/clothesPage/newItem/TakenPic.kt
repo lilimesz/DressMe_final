@@ -79,8 +79,6 @@ class TakenPic(private var bitmap: Bitmap) : Fragment() {
         }.addOnFailureListener {
             // Task failed with an exception
         }
-
-
     }
 
     @RequiresApi(Build.VERSION_CODES.Q)
