@@ -3,12 +3,9 @@ package com.google.dressme.clothesPage.newItem;
 import java.util.ArrayList;
 
 class ColorUtils {
+public ArrayList<ColorName> colorList = new ArrayList<>();
 
-    /**
-     * Initialize the color list that we have.
-     */
     public ArrayList<ColorName> initColorList() {
-        ArrayList<ColorName> colorList = new ArrayList<>();
         colorList.add(new ColorName("Black", 0x00, 0x00, 0x00));
         colorList.add(new ColorName("Gray", 0x80, 0x80, 0x80));
         colorList.add(new ColorName("Dark gray", 0xA9, 0xA9, 0xA9));

@@ -19,6 +19,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.graphics.blue
 import androidx.core.graphics.green
 import androidx.core.graphics.red
+import androidx.core.graphics.toColor
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,67 +32,37 @@ class NewItemPage(
     private var label: String, private var color: Color
 ) : Fragment() {
     private lateinit var mActivity: MainActivity
+    private var mainscreen: Boolean = true
+    private lateinit var newPiece: ImageView
+    private lateinit var sampleId: Array<Int>
+
+    private lateinit var myLayout: LinearLayout
     private lateinit var bgBLur: FrameLayout
 
     private lateinit var categories: Array<String>
-    private lateinit var subcategories: Array<Array<String>>
-
-    private lateinit var newPiece: ImageView
     private val labelTVArray = kotlin.collections.ArrayList<TextView?>(11)
+    private lateinit var labelTV: TextView
+
+
+    private lateinit var subcategories: Array<Array<String>>
     private var typeTVArray = ArrayList<TextView?>(emptyList())
+    private lateinit var typeTV: TextView
+    private lateinit var typeArray: Array<String>
+    private var selectedType: Int? = null
+
 
     private lateinit var colorArrayList: ArrayList<Colors>
     private lateinit var colorRecyclerView: RecyclerView
     private lateinit var colorsAdapter: ColorsAdapter
 
-    private lateinit var typeArray: Array<String>
-    private lateinit var myLayout: LinearLayout
-    private lateinit var typeTV: TextView
-    private lateinit var labelTV: TextView
-    private lateinit var sampleId: Array<Int>
-
     private val lp = ViewGroup.LayoutParams(
         ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
     )
-    private var mainscreen: Boolean = true
-    private var selectedType: Int? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val Top = resources.getStringArray(R.array.Top)
-        val Jacket = resources.getStringArray(R.array.Blazer_Jacket)
-        val Hoodie = resources.getStringArray(R.array.Hoodie)
-        val Longsleeve = resources.getStringArray(R.array.Longsleeve)
-        val Pants = resources.getStringArray(R.array.Pants)
-        val Skirt = resources.getStringArray(R.array.Skirt)
-        val Dress = resources.getStringArray(R.array.Dress)
-        val Shoes = resources.getStringArray(R.array.Shoes)
-        val Hat = resources.getStringArray(R.array.Hat)
-        val Outwear = resources.getStringArray(R.array.Outwear)
-        val Other = resources.getStringArray(R.array.Other)
-
-        categories = arrayOf(
-            "Top",
-            "Jacket",
-            "Hoodie",
-            "Longsleeve",
-            "Pants",
-            "Skirt",
-            "Dress",
-            "Shoes",
-            "Hat",
-            "Outwear",
-            "Other"
-        )
-        subcategories = arrayOf(
-            Top, Jacket, Hoodie, Longsleeve, Pants, Skirt, Dress, Shoes, Hat, Outwear, Other
-        )
-
-
-
-
+        categoryArray()
         templateArray()
 
 
@@ -102,28 +73,6 @@ class NewItemPage(
             }
         }
     }
-
-    private fun getUserdata() {
-
-        val colorlist = ColorUtils().initColorList()
-        for (i in colorlist.indices) {
-            val color = Colors(
-                Color.parseColor(
-                    "#${
-                        Integer.toHexString(
-                            Color.rgb(
-                                colorlist[i].r, colorlist[i].g, colorlist[i].b
-                            )
-                        )
-                    }"
-                )
-            )
-            colorArrayList.add(color)
-        }
-        colorsAdapter = ColorsAdapter(colorArrayList)
-        colorRecyclerView.adapter = colorsAdapter
-    }
-
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
@@ -155,55 +104,11 @@ class NewItemPage(
 
         }
 
-
         selectItem(typeTVArray, typeTV, typeArray, true) //OnClickListener
 
 
         //Color
-        val colorText = view.findViewById<TextView>(R.id.colorName)
-        val colorLayout = view.findViewById<LinearLayout>(R.id.chooseColor)
-        var dressColor = color.toArgb()
-        var colorName =
-            ColorUtils().getColorNameFromRgb(dressColor.red, dressColor.green, dressColor.blue)
-        newPiece.setColorFilter(dressColor, PorterDuff.Mode.MULTIPLY)
-        colorText.text = colorName
-
-        colorRecyclerView = view.findViewById<View>(R.id.chooseColorRCV) as RecyclerView
-        colorRecyclerView.setHasFixedSize(true)
-        colorRecyclerView.layoutManager = GridLayoutManager(context, 6)
-        colorArrayList = arrayListOf()
-        getUserdata()
-
-        colorText.setOnClickListener {
-            colorLayout.visibility = VISIBLE
-            bgBLur.visibility = VISIBLE
-            bgBLur.setOnClickListener {
-                colorLayout.visibility = INVISIBLE
-                bgBLur.visibility = INVISIBLE
-                return@setOnClickListener
-            }
-
-            colorsAdapter.onItemClick = {
-                Log.e(
-                    "COLOR?",
-                    Color.parseColor("#${Integer.toHexString(it.color).drop(2)}").toString()
-                )
-                dressColor = Color.parseColor("#${Integer.toHexString(it.color).drop(2)}")
-                colorName = ColorUtils().getColorNameFromRgb(
-                    dressColor.red, dressColor.green, dressColor.blue
-                )
-                newPiece.setColorFilter(dressColor, PorterDuff.Mode.MULTIPLY)
-                colorText.text = colorName
-
-                colorLayout.visibility = INVISIBLE
-                bgBLur.visibility = INVISIBLE
-
-            }
-
-        }
-
-
-
+        selectColor(view)
 
         return view
 
@@ -264,32 +169,6 @@ class NewItemPage(
         }
     }
 
-    private fun templateArray() {
-        sampleId = arrayOf(
-            R.drawable.top_template,
-            R.drawable.tshirt_template,
-            R.drawable.polo_shirt_template,
-            R.drawable.bodysuit_template,
-            R.drawable.undershirt_template,
-            R.drawable.jacket_template,
-            R.drawable.blazer_template,
-            R.drawable.hoodie_template,
-            R.drawable.longsleeve_template,
-            R.drawable.shirt_template,
-            R.drawable.blouse_template,
-            R.drawable.pants_template,
-            R.drawable.jeans_template,
-            R.drawable.shorts_template,
-            R.drawable.skirt_template,
-            R.drawable.dress_template,
-            R.drawable.shoes_template,
-            R.drawable.heels_template,
-            R.drawable.boots_template,
-            R.drawable.hat_template,
-            R.drawable.outerwear_template
-        )
-    }
-
     private fun defaultPicSelect(labelID: Int, typeID: Int): Boolean {
         Log.e("7B", "check") //4th     //change4    //Typechange4
         if (selectedType != null) {
@@ -346,9 +225,10 @@ class NewItemPage(
                 myLayout.visibility = VISIBLE
                 bgBLur.visibility = VISIBLE
                 bgBLur.setOnClickListener {
-                    myLayout.visibility= INVISIBLE
+                    myLayout.visibility = INVISIBLE
                     bgBLur.visibility = INVISIBLE
-                    return@setOnClickListener }
+                    return@setOnClickListener
+                }
             }
         }
     }
@@ -400,6 +280,136 @@ class NewItemPage(
             picID += typeID - 1
         }
         return picID
+    }
+
+    private fun templateArray() {
+        sampleId = arrayOf(
+            R.drawable.top_template,
+            R.drawable.tshirt_template,
+            R.drawable.polo_shirt_template,
+            R.drawable.bodysuit_template,
+            R.drawable.undershirt_template,
+            R.drawable.jacket_template,
+            R.drawable.blazer_template,
+            R.drawable.hoodie_template,
+            R.drawable.longsleeve_template,
+            R.drawable.shirt_template,
+            R.drawable.blouse_template,
+            R.drawable.pants_template,
+            R.drawable.jeans_template,
+            R.drawable.shorts_template,
+            R.drawable.skirt_template,
+            R.drawable.dress_template,
+            R.drawable.shoes_template,
+            R.drawable.heels_template,
+            R.drawable.boots_template,
+            R.drawable.hat_template,
+            R.drawable.outerwear_template
+        )
+    }
+
+    private fun categoryArray() {
+
+        val Top = resources.getStringArray(R.array.Top)
+        val Jacket = resources.getStringArray(R.array.Blazer_Jacket)
+        val Hoodie = resources.getStringArray(R.array.Hoodie)
+        val Longsleeve = resources.getStringArray(R.array.Longsleeve)
+        val Pants = resources.getStringArray(R.array.Pants)
+        val Skirt = resources.getStringArray(R.array.Skirt)
+        val Dress = resources.getStringArray(R.array.Dress)
+        val Shoes = resources.getStringArray(R.array.Shoes)
+        val Hat = resources.getStringArray(R.array.Hat)
+        val Outwear = resources.getStringArray(R.array.Outwear)
+        val Other = resources.getStringArray(R.array.Other)
+
+        categories = arrayOf(
+            "Top",
+            "Jacket",
+            "Hoodie",
+            "Longsleeve",
+            "Pants",
+            "Skirt",
+            "Dress",
+            "Shoes",
+            "Hat",
+            "Outwear",
+            "Other"
+        )
+        subcategories = arrayOf(
+            Top, Jacket, Hoodie, Longsleeve, Pants, Skirt, Dress, Shoes, Hat, Outwear, Other
+        )
+
+    }
+
+    private fun colorListPrep() {
+
+        val colorlist = ColorUtils().initColorList()
+        for (i in colorlist.indices) {
+            val color = Colors(
+                Color.parseColor(
+                    "#${
+                        Integer.toHexString(
+                            Color.rgb(
+                                colorlist[i].r, colorlist[i].g, colorlist[i].b
+                            )
+                        )
+                    }"
+                )
+            )
+            colorArrayList.add(color)
+        }
+        colorsAdapter = ColorsAdapter(colorArrayList)
+        colorRecyclerView.adapter = colorsAdapter
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun selectColor(view: View) {
+        val colorText = view.findViewById<TextView>(R.id.colorName)
+        val colorLayout = view.findViewById<LinearLayout>(R.id.chooseColor)
+        var dressColor = Color.WHITE.toColor()
+        var dressARGBColor = color.toArgb()
+        var colorName =
+            ColorUtils().getColorNameFromRgb(dressARGBColor.red, dressARGBColor.green, dressARGBColor.blue)
+        val colorListHere=ColorUtils().initColorList()
+        for (i in colorListHere.indices) {
+            if (colorListHere[i].name == colorName){
+                dressColor= Color.rgb(colorListHere[i].r,colorListHere[i].g,colorListHere[i].b).toColor()
+            }
+        }
+
+        newPiece.setColorFilter(dressColor.toArgb(), PorterDuff.Mode.MULTIPLY)
+        colorText?.text = colorName
+
+        colorRecyclerView = view.findViewById<View>(R.id.chooseColorRCV) as RecyclerView
+        colorRecyclerView.setHasFixedSize(true)
+        colorRecyclerView.layoutManager = GridLayoutManager(context, 6)
+        colorArrayList = arrayListOf()
+        colorListPrep()
+
+        colorText?.setOnClickListener {
+            colorLayout?.visibility = VISIBLE
+            bgBLur.visibility = VISIBLE
+            bgBLur.setOnClickListener {
+                colorLayout?.visibility = INVISIBLE
+                bgBLur.visibility = INVISIBLE
+                return@setOnClickListener
+            }
+
+            colorsAdapter.onItemClick = {
+                dressARGBColor = Color.parseColor("#${Integer.toHexString(it.color).drop(2)}")
+                colorName = ColorUtils().getColorNameFromRgb(
+                    dressARGBColor.red, dressARGBColor.green, dressARGBColor.blue
+                )
+                newPiece.setColorFilter(dressARGBColor, PorterDuff.Mode.MULTIPLY)
+                colorText.text = colorName
+
+                colorLayout?.visibility = INVISIBLE
+                bgBLur.visibility = INVISIBLE
+
+            }
+
+        }
+
     }
 
 
