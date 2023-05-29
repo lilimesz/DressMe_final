@@ -19,8 +19,8 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.home -> replaceFragment(Home())
                 R.id.clothes -> replaceFragment(ClothesMainPage())
-                //R.id.profile -> replaceFragment(Profile())
                 R.id.outfits -> replaceFragment(Outfits())
+                //R.id.profile -> replaceFragment(Profile())
                 //R.id.settings -> replaceFragment(Settings())
 
                 else -> {

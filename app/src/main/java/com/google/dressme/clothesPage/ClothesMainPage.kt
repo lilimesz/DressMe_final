@@ -32,8 +32,6 @@ class ClothesMainPage : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         iconId = arrayOf(
             R.drawable.tshirt,
             R.drawable.long_sleeve,
@@ -48,7 +46,6 @@ class ClothesMainPage : Fragment() {
             R.drawable.singlet
 
         )
-
         descId = arrayOf(
             "Tops",
             "Jackets & Blazers",
@@ -62,18 +59,6 @@ class ClothesMainPage : Fragment() {
             "Outwears",
             "Other"
         )
-
-    }
-
-    private fun getUserdata() {
-
-        for (i in iconId.indices) {
-            val category = Categories(iconId[i], descId[i])
-            newArrayList.add(category)
-        }
-
-        clothesAdapter = ClothesMainAdapter(newArrayList)
-        newRecyclerView.adapter = clothesAdapter
     }
 
     override fun onCreateView(
@@ -125,6 +110,15 @@ class ClothesMainPage : Fragment() {
         }
 
 
+    }
+
+    private fun getUserdata() {
+        for (i in iconId.indices) {
+            val category = Categories(iconId[i], descId[i])
+            newArrayList.add(category)
+        }
+        clothesAdapter = ClothesMainAdapter(newArrayList)
+        newRecyclerView.adapter = clothesAdapter
     }
 
     private fun addTestItems() {
