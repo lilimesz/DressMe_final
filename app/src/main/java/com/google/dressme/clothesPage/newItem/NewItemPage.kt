@@ -177,9 +177,17 @@ class NewItemPage(
         colorText.setOnClickListener {
             colorLayout.visibility = VISIBLE
             bgBLur.visibility = VISIBLE
+            bgBLur.setOnClickListener {
+                colorLayout.visibility = INVISIBLE
+                bgBLur.visibility = INVISIBLE
+                return@setOnClickListener
+            }
 
             colorsAdapter.onItemClick = {
-                Log.e("COLOR?",Color.parseColor("#${Integer.toHexString(it.color).drop(2)}").toString())
+                Log.e(
+                    "COLOR?",
+                    Color.parseColor("#${Integer.toHexString(it.color).drop(2)}").toString()
+                )
                 dressColor = Color.parseColor("#${Integer.toHexString(it.color).drop(2)}")
                 colorName = ColorUtils().getColorNameFromRgb(
                     dressColor.red, dressColor.green, dressColor.blue
@@ -337,6 +345,10 @@ class NewItemPage(
                 mainscreen = false
                 myLayout.visibility = VISIBLE
                 bgBLur.visibility = VISIBLE
+                bgBLur.setOnClickListener {
+                    myLayout.visibility= INVISIBLE
+                    bgBLur.visibility = INVISIBLE
+                    return@setOnClickListener }
             }
         }
     }

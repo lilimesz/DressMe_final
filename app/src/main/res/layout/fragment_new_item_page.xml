@@ -23,10 +23,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottomFrameLayout2"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_margin="7dp"
         android:background="#FFF1E6"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:alpha="0.97"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3">
@@ -35,35 +35,18 @@
             android:id="@+id/label"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
             android:background="#FFF7F1"
             android:elevation="1dp"
-            android:padding="5dp"
+            android:padding="3dp"
             android:text="T-Shirt"
             android:textAlignment="center"
             android:textColor="#391B00"
             android:textSize="28sp"
             android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/dressType"
             app:layout_constraintEnd_toStartOf="@+id/guideline7"
-            app:layout_constraintStart_toStartOf="@+id/guideline5"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="HardcodedText" />
-
-        <TextView
-            android:id="@+id/colorName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="188dp"
-            android:background="#FFF7F1"
-            android:elevation="1dp"
-            android:padding="5dp"
-            android:text="Kék"
-            android:textAlignment="center"
-            android:textColor="#391B00"
-            android:textSize="28sp"
-            android:textStyle="italic"
-            app:layout_constraintEnd_toStartOf="@+id/guideline7"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="HardcodedText" />
@@ -72,9 +55,11 @@
             android:id="@+id/dressType"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:background="#FFF7F1"
             android:elevation="1dp"
-            android:padding="5dp"
+            android:padding="3dp"
             android:text="Polo shirt"
             android:textAlignment="center"
             android:textColor="#391B00"
@@ -85,6 +70,26 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
             app:layout_constraintTop_toBottomOf="@+id/label"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/colorName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:background="#FFF7F1"
+            android:elevation="1dp"
+            android:padding="7dp"
+            android:text="Kék"
+            android:textAlignment="center"
+            android:textColor="#391B00"
+            android:textSize="22sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline7"
+            app:layout_constraintStart_toStartOf="@+id/guideline5"
+            app:layout_constraintTop_toBottomOf="@id/dressType"
             tools:ignore="HardcodedText" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -206,13 +211,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="460dp" />
+        app:layout_constraintGuide_percent="0.60" />
 
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="70dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginBottom="80dp"
         android:background="#E6FFFFFF"
         android:padding="30dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomFrameLayout2"
@@ -237,11 +245,35 @@
         app:layout_constraintTop_toTopOf="@+id/frameLayout"
         tools:ignore="ContentDescription,ImageContrastCheck" />
 
+    <Button
+        android:id="@+id/backButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:text="Back"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/teal_200"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/doneButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:text="Done"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/teal_200"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <FrameLayout
         android:id="@+id/backgroundBlur"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#C45E5E5E"
+        android:clickable="true"
+        android:focusable="true"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/bottomFrameLayout2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -275,6 +307,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="#FFFAFA"
+        android:elevation="3dp"
         android:orientation="vertical"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -286,6 +319,7 @@
             android:id="@+id/chooseColorRCV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:elevation="5dp"
             android:padding="5dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="6"
