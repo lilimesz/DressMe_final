@@ -10,10 +10,7 @@ import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.activity.addCallback
 import androidx.annotation.RequiresApi
 import androidx.core.graphics.blue
@@ -23,9 +20,15 @@ import androidx.core.graphics.toColor
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.dressme.Home
 import com.google.dressme.MainActivity
 import com.google.dressme.R
+import com.google.dressme.clothesPage.ClothesGridLayout
+import com.google.dressme.clothesPage.ClothesMainPage
+import com.google.dressme.clothesPage.Clothing
 import java.util.*
+import kotlin.properties.Delegates
 
 
 class NewItemPage(
@@ -54,10 +57,22 @@ class NewItemPage(
     private lateinit var colorArrayList: ArrayList<Colors>
     private lateinit var colorRecyclerView: RecyclerView
     private lateinit var colorsAdapter: ColorsAdapter
+    private lateinit var colorText: TextView
+    private lateinit var dressColor: Color
+    private var dressARGBColor by Delegates.notNull<Int>()
 
     private val lp = ViewGroup.LayoutParams(
         ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
     )
+
+    private lateinit var backButton: Button
+    private lateinit var doneButton: Button
+
+
+    companion object {
+        var clothesList: MutableList<Clothing> = arrayListOf()
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,7 +84,7 @@ class NewItemPage(
         mActivity = (activity as MainActivity)
         if (mainscreen) {
             requireActivity().onBackPressedDispatcher.addCallback(this) {
-                mActivity.replaceFragment(CameraView())
+                mActivity.replaceFragment(ClothesMainPage())
             }
         }
     }
@@ -79,8 +94,15 @@ class NewItemPage(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.fragment_new_item_page, container, false)
+        val bview = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        bview.visibility = View.GONE
+
         bgBLur = view.findViewById(R.id.backgroundBlur)
         myLayout = view.findViewById(R.id.chooseLabel)
+
+        //Buttons
+        backButton = view.findViewById(R.id.backButton2)
+        doneButton = view.findViewById(R.id.doneButton)
 
 
         //Image of the dress
@@ -89,6 +111,7 @@ class NewItemPage(
         //Category
         labelTV = view.findViewById(R.id.label)
         typeTV = view.findViewById(R.id.dressType)
+        colorText = view.findViewById(R.id.colorName)
 
 
         //OnClickListener a label TextView-ra manuális felülíráshoz
@@ -106,9 +129,29 @@ class NewItemPage(
 
         selectItem(typeTVArray, typeTV, typeArray, true) //OnClickListener
 
+        selectColor(view) //Color set & OnClicklistener & Recyclerview
 
-        //Color
-        selectColor(view)
+        if (mainscreen) {
+
+            backButton.setOnClickListener {
+                mActivity.replaceFragment(ClothesMainPage())
+            }
+            doneButton.setOnClickListener {
+                clothesList.add(
+                    Clothing(
+                        labelTV.text.toString(),
+                        typeTV.text.toString(),
+                        dressARGBColor,
+                        sampleId[getIdForPic(getLabelID(labelTV.text.toString()),getTypeID(typeTV.text.toString()))]
+                    )
+                )
+                Toast.makeText(context, "Item added!", Toast.LENGTH_LONG).show()
+                mActivity.replaceFragment(Home())
+                val bview =
+                    requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+                bview.visibility = VISIBLE
+            }
+        }
 
         return view
 
@@ -304,7 +347,8 @@ class NewItemPage(
             R.drawable.heels_template,
             R.drawable.boots_template,
             R.drawable.hat_template,
-            R.drawable.outerwear_template
+            R.drawable.outerwear_template,
+            R.drawable.baseline_person_24
         )
     }
 
@@ -364,21 +408,21 @@ class NewItemPage(
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun selectColor(view: View) {
-        val colorText = view.findViewById<TextView>(R.id.colorName)
         val colorLayout = view.findViewById<LinearLayout>(R.id.chooseColor)
-        var dressColor = Color.WHITE.toColor()
-        var dressARGBColor = color.toArgb()
-        var colorName =
-            ColorUtils().getColorNameFromRgb(dressARGBColor.red, dressARGBColor.green, dressARGBColor.blue)
-        val colorListHere=ColorUtils().initColorList()
+        dressColor = Color.WHITE.toColor()
+        dressARGBColor = color.toArgb()
+        var colorName = ColorUtils().getColorNameFromRgb(
+            dressARGBColor.red, dressARGBColor.green, dressARGBColor.blue
+        )
+        val colorListHere = ColorUtils().initColorList()
         for (i in colorListHere.indices) {
-            if (colorListHere[i].name == colorName){
-                dressColor= Color.rgb(colorListHere[i].r,colorListHere[i].g,colorListHere[i].b).toColor()
+            if (colorListHere[i].name == colorName) {
+                dressColor =
+                    Color.rgb(colorListHere[i].r, colorListHere[i].g, colorListHere[i].b).toColor()
             }
         }
-
         newPiece.setColorFilter(dressColor.toArgb(), PorterDuff.Mode.MULTIPLY)
-        colorText?.text = colorName
+        colorText.text = colorName
 
         colorRecyclerView = view.findViewById<View>(R.id.chooseColorRCV) as RecyclerView
         colorRecyclerView.setHasFixedSize(true)
@@ -386,7 +430,7 @@ class NewItemPage(
         colorArrayList = arrayListOf()
         colorListPrep()
 
-        colorText?.setOnClickListener {
+        colorText.setOnClickListener {
             colorLayout?.visibility = VISIBLE
             bgBLur.visibility = VISIBLE
             bgBLur.setOnClickListener {

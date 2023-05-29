@@ -27,7 +27,7 @@ class ClothesMainPage : Fragment() {
     private lateinit var iconId: Array<Int>
     private lateinit var descId: Array<String>
     private lateinit var mActivity: MainActivity
-    private lateinit var clothesAdapter:ClothesMainAdapter
+    private lateinit var clothesAdapter: ClothesMainAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +71,7 @@ class ClothesMainPage : Fragment() {
             newArrayList.add(category)
         }
 
-        clothesAdapter= ClothesMainAdapter(newArrayList)
+        clothesAdapter = ClothesMainAdapter(newArrayList)
         newRecyclerView.adapter = clothesAdapter
     }
 
@@ -86,7 +86,7 @@ class ClothesMainPage : Fragment() {
         newArrayList = arrayListOf()
         getUserdata()
 
-       clothesAdapter.onItemClick = {
+        clothesAdapter.onItemClick = {
             mActivity.replaceFragment(ClothesGridLayout())
         }
 
@@ -109,8 +109,8 @@ class ClothesMainPage : Fragment() {
             cameraBtn.setOnClickListener { mActivity.replaceFragment(CameraView()) }
             manualBtn.setOnClickListener {
                 mActivity.replaceFragment(
-                    NewItemPage("T-Shirt",Color.WHITE.toColor())
-                    )
+                    NewItemPage("T-Shirt", Color.WHITE.toColor())
+                )
             }
 
 

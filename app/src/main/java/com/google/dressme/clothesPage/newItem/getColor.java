@@ -3,7 +3,7 @@ package com.google.dressme.clothesPage.newItem;
 import java.util.ArrayList;
 
 class ColorUtils {
-public ArrayList<ColorName> colorList = new ArrayList<>();
+    public ArrayList<ColorName> colorList = new ArrayList<>();
 
     public ArrayList<ColorName> initColorList() {
         colorList.add(new ColorName("Black", 0x00, 0x00, 0x00));
