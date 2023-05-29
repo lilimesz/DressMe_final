@@ -1,7 +1,6 @@
 package com.google.dressme.clothesPage
 
 import android.graphics.PorterDuff
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +39,8 @@ class ClothesAdapter(private val clothesList: ArrayList<Clothes3>) :
     override fun getItemCount(): Int {
         return clothesList.size
     }
+
+
 
 
 }

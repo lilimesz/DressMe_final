@@ -18,6 +18,7 @@ import com.google.dressme.MainActivity
 import com.google.dressme.R
 import com.google.dressme.clothesPage.newItem.CameraView
 import com.google.dressme.clothesPage.newItem.NewItemPage
+import com.google.dressme.clothesPage.newItem.NewItemPage.Companion.clothesList
 
 
 class ClothesMainPage : Fragment() {
@@ -86,8 +87,15 @@ class ClothesMainPage : Fragment() {
         newArrayList = arrayListOf()
         getUserdata()
 
+        //clothesList = clothesList
+        if (clothesList.isEmpty()) {
+            addTestItems()
+        }
+
+
         clothesAdapter.onItemClick = {
-            mActivity.replaceFragment(ClothesGridLayout())
+            val helper = "${it.desc[0]}${it.desc[1]}"
+            mActivity.replaceFragment(ClothesGridLayout(helper))
         }
 
         return view
@@ -115,6 +123,73 @@ class ClothesMainPage : Fragment() {
 
 
         }
+
+
+    }
+
+    private fun addTestItems() {
+        clothesList.add(Clothing("Top", "T-Shirt", -5383962, R.drawable.tshirt_template))
+        clothesList.add(Clothing("Top", "Top", Color.WHITE, R.drawable.top_template))
+        clothesList.add(Clothing("Top", "T-Shirt", -1146130, R.drawable.tshirt_template))
+        clothesList.add(
+            Clothing(
+                "Top", "Undershirt", -2354116, R.drawable.undershirt_template
+            )
+        )
+        clothesList.add(Clothing("Top", "Body", -5383962, R.drawable.bodysuit_template))
+        clothesList.add(Clothing("Top", "T-Shirt", Color.WHITE, R.drawable.tshirt_template))
+        clothesList.add(
+            Clothing(
+                "Top", "Polo", -16751616, R.drawable.polo_shirt_template
+            )
+        )
+        clothesList.add(
+            Clothing(
+                "Top", "Polo", Color.WHITE, R.drawable.polo_shirt_template
+            )
+        )
+        clothesList.add(
+            Clothing(
+                "Jacket", "Jacket", Color.DKGRAY, R.drawable.jacket_template
+            )
+        )
+        clothesList.add(
+            Clothing(
+                "Jacket", "Jacket", -5383962, R.drawable.jacket_template
+            )
+        )
+        clothesList.add(
+            Clothing(
+                "Blazer", "Blazer", -463124, R.drawable.blazer_template
+            )
+        )
+        clothesList.add(Clothing("Hoodie", "-", Color.LTGRAY, R.drawable.hoodie_template))
+        clothesList.add(Clothing("Hoodie", "-", -1146130, R.drawable.hoodie_template))
+        clothesList.add(
+            Clothing(
+                "Longsleeve", "Shirt", -5383962, R.drawable.shirt_template
+            )
+        )
+        clothesList.add(
+            Clothing(
+                "Longsleeve", "Shirt", Color.LTGRAY, R.drawable.shirt_template
+            )
+        )
+        clothesList.add(
+            Clothing(
+                "Longsleeve", "Blouse", -16181, R.drawable.blouse_template
+            )
+        )
+        clothesList.add(Clothing("Pants", "Pants", -16751616, R.drawable.pants_template))
+        clothesList.add(Clothing("Pants", "Jeans", -5383962, R.drawable.jeans_template))
+        clothesList.add(Clothing("Pants", "Shorts", -1146130, R.drawable.shorts_template))
+        clothesList.add(Clothing("Skirt", "-", -2180985, R.drawable.skirt_template))
+        clothesList.add(Clothing("Dress", "-", -2354116, R.drawable.dress_template))
+        clothesList.add(Clothing("Shoes", "Shoes", Color.WHITE, R.drawable.shoes_template))
+        clothesList.add(Clothing("Shoes", "Boots", -64, R.drawable.boots_template))
+        clothesList.add(Clothing("Shoes", "Shoes", Color.LTGRAY, R.drawable.shoes_template))
+        clothesList.add(Clothing("Shoes", "Heels", Color.RED, R.drawable.heels_template))
+        clothesList.add(Clothing("Outwear", "-", Color.WHITE, R.drawable.outerwear_template))
 
 
     }
